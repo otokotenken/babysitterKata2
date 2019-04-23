@@ -40,4 +40,14 @@ public class BabysitterKataControllerTest {
         Mockito.verifyNoMoreInteractions(babysitterKataController);
     }
 
+    @Test
+    public void validateJobEndpointInvalidStartTIme() throws Exception {
+        String request = "0";
+//        Mockito.when(babysitterKataController.validateJob()).thenReturn(new ResponseEntity<>("Error", HttpStatus.BAD_REQUEST));
+        mvc.perform(post("/job")
+                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+                .content(request))
+                .andExpect(status().isBadRequest());
+    }
+    
 }
