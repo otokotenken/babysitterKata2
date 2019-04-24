@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class BabysitterKataService {
 
+    public int convertTimeToAPositiveRange(int time) {
+        return 7;
 
+    }
 
 }

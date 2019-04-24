@@ -2,10 +2,14 @@ package com.example.babysitterKata2;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class BabysitterKataServiceTest {
 
     @InjectMocks
@@ -14,12 +18,12 @@ public class BabysitterKataServiceTest {
     Family familyA;
     @Before
     public void setUp() {
-        familyA = new Family(5, 11, 15);
+        familyA = new Family(12, 11, 15);
     }
 
     @Test
     public void ifStartTimeIsLessThanOrEqualTwelveSubtractFive() {
-        assertEquals(7, babysitterKataService.convertTimeToAPostiveRange(familyA.payShiftStartTime));
+        assertEquals(7, babysitterKataService.convertTimeToAPositiveRange(familyA.payShiftStartTime));
     }
 
 }
