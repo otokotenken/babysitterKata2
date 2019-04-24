@@ -31,23 +31,23 @@ public class BabysitterKataControllerTest {
 
     @Test
     public void validateJobEndpointReturnsAnJobAcceptedMessage() throws Exception {
-        String request = "";
-        Mockito.when(babysitterKataController.validateJob()).thenReturn(new ResponseEntity<>("Job Accepted", HttpStatus.ACCEPTED));
+        String request = "{\"payShiftStartTime\": 1, \"payShiftEndTime\": 1, \"payRate\": 5}";
+//        Mockito.when(babysitterKataController.validateJob(Mockito.any())).thenReturn(new ResponseEntity<>("Job Accepted", HttpStatus.ACCEPTED));
         mvc.perform(post("/job").contentType(MediaType.APPLICATION_JSON_UTF8_VALUE).content(request))
                 .andExpect(status().isAccepted())
                 .andExpect(content().string("Job Accepted"));
-        Mockito.verify(babysitterKataController, Mockito.times(1)).validateJob();
+        Mockito.verify(babysitterKataController, Mockito.times(1)).validateJob(Mockito.any());
         Mockito.verifyNoMoreInteractions(babysitterKataController);
     }
 
     @Test
     public void validateJobEndpointInvalidStartTIme() throws Exception {
-        String request = "0";
+        String request = "[{\"payShiftStartTime\": 0, \"payShiftEndTime\": 10, \"payRate\": 5}]";
 //        Mockito.when(babysitterKataController.validateJob()).thenReturn(new ResponseEntity<>("Error", HttpStatus.BAD_REQUEST));
         mvc.perform(post("/job")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
                 .content(request))
                 .andExpect(status().isBadRequest());
     }
-    
+
 }
