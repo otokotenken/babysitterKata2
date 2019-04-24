@@ -6,8 +6,11 @@ import org.springframework.stereotype.Service;
 public class BabysitterKataService {
 
     public int convertTimeToAPositiveRange(int time) {
-        return 7;
-
+        int newTime = 0;
+        if (time <= 12) {
+            newTime = time-5;
+        }
+        return newTime;
     }
 
 }
