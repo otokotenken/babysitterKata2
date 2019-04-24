@@ -9,6 +9,8 @@ public class BabysitterKataService {
         int newTime = 0;
         if (time <= 12) {
             newTime = time-5;
+        } else if (time >= 5){
+            newTime = time-5;
         }
         return newTime;
     }

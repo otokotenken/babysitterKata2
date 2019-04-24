@@ -23,7 +23,12 @@ public class BabysitterKataServiceTest {
 
     @Test
     public void ifStartTimeIsLessThanOrEqualTwelveSubtractFive() {
-        assertEquals(7, babysitterKataService.convertTimeToAPositiveRange(familyA.payShiftStartTime));
+        assertEquals(7, babysitterKataService.convertTimeToAPositiveRange(12));
+    }
+
+    @Test
+    public void ifStartTimeMoreThanOrEqualFiveSubtractFive(){
+        assertEquals(0, babysitterKataService.convertTimeToAPositiveRange(5));
     }
 
 }
