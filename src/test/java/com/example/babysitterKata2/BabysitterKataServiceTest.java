@@ -41,4 +41,9 @@ public class BabysitterKataServiceTest {
         assertTrue(babysitterKataService.validateStartTimeWithInRange(5));
     }
 
+    @Test
+    public void shouldReturnFalseStartTimeFourAmIsAfterAvailabilityRangeOfShiftStarting() {
+        assertFalse(babysitterKataService.validateStartTimeWithInRange(4));
+    }
+
 }
