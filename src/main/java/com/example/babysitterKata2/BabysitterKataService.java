@@ -15,4 +15,7 @@ public class BabysitterKataService {
         return newTime;
     }
 
+    public boolean validateStartTimeWithInRange(int startTime) {
+        return true;
+    }
 }

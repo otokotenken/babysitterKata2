@@ -36,4 +36,9 @@ public class BabysitterKataServiceTest {
         assertEquals(10, babysitterKataService.convertTimeToAPositiveRange(3));
     }
 
+    @Test
+    public void shouldReturnTrueStartTimeFivePmIsWithInAvailabilityRAngeOfShiftStarting() {
+        assertTrue(babysitterKataService.validateStartTimeWithInRange(5));
+    }
+
 }
