@@ -55,4 +55,9 @@ public class BabysitterKataServiceTest {
         assertFalse(babysitterKataService.validateEndTimeWithInRange(1, 4));
     }
 
+    @Test
+    public void shouldReturnOneHundredAndNinetyWhenGivenFamilyAInput() {
+        assertEquals(190, babysitterKataService.calculatePay(familyA));
+    }
+
 }

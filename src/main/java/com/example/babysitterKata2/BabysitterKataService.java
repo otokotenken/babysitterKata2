@@ -28,4 +28,15 @@ public class BabysitterKataService {
         } else
             return false;
     }
+
+    public int calculatePay(Family[] family) {
+        int paymentTotal = 0;
+        int previousTime = 0;
+        for (Family session : family) {
+            int convertedTIme = convertTimeToAPositiveRange(session.payShiftEndTime) - previousTime;
+            paymentTotal += session.payRate * convertedTIme;
+            previousTime += convertedTIme;
+        }
+        return paymentTotal;
+    }
 }
