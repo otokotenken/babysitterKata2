@@ -31,4 +31,9 @@ public class BabysitterKataServiceTest {
         assertEquals(0, babysitterKataService.convertTimeToAPositiveRange(5));
     }
 
+    @Test
+    public void IfStartTimeNotBetweenTweleveAndFiveAddSeven() {
+        assertEquals(10, babysitterKataService.convertTimeToAPositiveRange(3));
+    }
+
 }
