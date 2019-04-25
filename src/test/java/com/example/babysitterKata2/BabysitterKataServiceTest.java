@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.*;
@@ -44,6 +43,16 @@ public class BabysitterKataServiceTest {
     @Test
     public void shouldReturnFalseStartTimeFourAmIsAfterAvailabilityRangeOfShiftStarting() {
         assertFalse(babysitterKataService.validateStartTimeWithInRange(4));
+    }
+
+    @Test
+    public void shouldReturnTrueIfEndTimeFourAmIsAfterStartTimeOfFivePm() {
+        assertTrue(babysitterKataService.validateEndTimeWithInRange(4, 5));
+    }
+
+    @Test
+    public void shouldReturnFalseIfEndTimeSixPmIsAfterStartTimeOfFivePm() {
+        assertFalse(babysitterKataService.validateEndTimeWithInRange(1, 4));
     }
 
 }

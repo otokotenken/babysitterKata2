@@ -21,4 +21,11 @@ public class BabysitterKataService {
         }
         return false;
     }
+
+    public boolean validateEndTimeWithInRange(int endTime, int startTime) {
+        if (convertTimeToAPositiveRange(endTime) > convertTimeToAPositiveRange(startTime)) {
+            return true;
+        } else
+            return false;
+    }
 }
