@@ -13,8 +13,8 @@ public class BabysitterKataController {
 
     @RequestMapping(value = "job", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<String> validateJob(@RequestBody Family family) {
-        if (family.payShiftStartTime == 1) {
+    public ResponseEntity<String> validateJob(@RequestBody Family[] family) {
+        if (family[0].payShiftStartTime == 1) {
             return ResponseEntity.status(HttpStatus.ACCEPTED).body("Job Accepted");
         }
         else {

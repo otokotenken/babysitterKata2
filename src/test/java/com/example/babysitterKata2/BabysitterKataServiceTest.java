@@ -14,10 +14,10 @@ public class BabysitterKataServiceTest {
     @InjectMocks
     BabysitterKataService babysitterKataService;
 
-    Family familyA;
+    Family[] familyA;
     @Before
     public void setUp() {
-        familyA = new Family(12, 11, 15);
+        familyA = new Family[]{new Family(5, 11, 15), new Family(5, 4, 20)};
     }
 
     @Test
