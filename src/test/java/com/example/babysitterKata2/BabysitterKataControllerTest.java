@@ -14,6 +14,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.http.MediaType;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -39,18 +41,29 @@ public class BabysitterKataControllerTest {
     @Test
     public void validateJobEndpointReturnsAnJobAcceptedMessage() throws Exception {
         String request = "[{\"payShiftStartTime\": 5, \"payShiftEndTime\": 9, \"payRate\": 21}, {\"payShiftStartTime\": 5, \"payShiftEndTime\": 4, \"payRate\": 15}]";
-//        Mockito.when(babysitterKataController.validateJob(Mockito.any())).thenReturn(new ResponseEntity<>("Job Accepted", HttpStatus.ACCEPTED));
+        Mockito.when(babysitterKataService.validateStartTimeWithInRange(anyInt())).thenReturn(true);
+        when(babysitterKataService.validateEndTimeWithInRange(anyInt(), anyInt())).thenReturn(true);
         Mockito.when(babysitterKataService.calculatePay(Mockito.any())).thenReturn(189);
-        mvc.perform(post("/job").contentType(MediaType.APPLICATION_JSON_UTF8_VALUE).content(request))
+        mvc.perform(post("/job")
+                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+                .content(request))
                 .andExpect(status().isAccepted());
-
         assertEquals("189", babysitterKataController.validateJob(familyC).getBody());
     }
 
     @Test
     public void validateJobEndpointInvalidStartTIme() throws Exception {
         String request = "{\"payShiftStartTime\": 0, \"payShiftEndTime\": 10, \"payRate\": 5}";
-//        Mockito.when(babysitterKataController.validateJob()).thenReturn(new ResponseEntity<>("Error", HttpStatus.BAD_REQUEST));
+        mvc.perform(post("/job")
+                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+                .content(request))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void validJobEndpointValidatesEndTIme() throws Exception {
+        String request = "[{\"payShiftStartTime\": 5, \"payShiftEndTime\": 4, \"payRate\": 5}]";
+        when(babysitterKataService.validateStartTimeWithInRange(anyInt())).thenReturn(true);
         mvc.perform(post("/job")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
                 .content(request))

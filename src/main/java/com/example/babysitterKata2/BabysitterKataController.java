@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.server.ResponseStatusException;
 
 @Controller
 public class BabysitterKataController {
@@ -18,8 +19,17 @@ public class BabysitterKataController {
     @RequestMapping(value = "job", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> validateJob(@RequestBody Family[] family) {
-        Integer total = babysitterKataService.calculatePay(family);
-        System.out.println(total.toString());
+        for(Family timeBlock: family) {
+            if (!babysitterKataService.validateStartTimeWithInRange(timeBlock.getPayShiftStartTime())) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            }
+            if(!babysitterKataService.validateEndTimeWithInRange(timeBlock.getPayShiftEndTime(), timeBlock.getPayShiftStartTime())) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            }
+        }
+            Integer total = babysitterKataService.calculatePay(family);
+            System.out.println(total.toString());
+
         return new ResponseEntity<>(total.toString(), HttpStatus.ACCEPTED);
     }
 }
