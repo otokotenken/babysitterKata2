@@ -15,9 +15,14 @@ public class BabysitterKataServiceTest {
     BabysitterKataService babysitterKataService;
 
     Family[] familyA;
+    Family[] familyB;
+    Family[] familyC;
+
     @Before
     public void setUp() {
         familyA = new Family[]{new Family(5, 11, 15), new Family(5, 4, 20)};
+        familyB = new Family[] {new Family(5, 10, 12), new Family(5,12, 8), new Family(5, 4, 16)};
+        familyC = new Family[] {new Family(5, 9, 21), new Family(5, 4, 15)};
     }
 
     @Test
@@ -58,6 +63,16 @@ public class BabysitterKataServiceTest {
     @Test
     public void shouldReturnOneHundredAndNinetyWhenGivenFamilyAInput() {
         assertEquals(190, babysitterKataService.calculatePay(familyA));
+    }
+
+    @Test
+    public void shouldReturnOneHundredAndFortyWhenGivenFamilyBInput() {
+        assertEquals(140, babysitterKataService.calculatePay(familyB));
+    }
+
+    @Test
+    public void shouldReturnOneHundredAndEightyNineWhenGivenFamilyCInput() {
+        assertEquals(189, babysitterKataService.calculatePay(familyC));
     }
 
 }

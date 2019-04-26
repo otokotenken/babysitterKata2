@@ -42,7 +42,7 @@ public class BabysitterKataControllerTest {
 
     @Test
     public void validateJobEndpointInvalidStartTIme() throws Exception {
-        String request = "[{\"payShiftStartTime\": 0, \"payShiftEndTime\": 10, \"payRate\": 5}]";
+        String request = "{\"payShiftStartTime\": 0, \"payShiftEndTime\": 10, \"payRate\": 5}";
 //        Mockito.when(babysitterKataController.validateJob()).thenReturn(new ResponseEntity<>("Error", HttpStatus.BAD_REQUEST));
         mvc.perform(post("/job")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
