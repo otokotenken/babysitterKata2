@@ -7,8 +7,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.http.MediaType;
@@ -35,7 +33,6 @@ public class BabysitterKataControllerTest {
     public void setUp(){
         mvc = MockMvcBuilders.standaloneSetup(babysitterKataController).build();
         familyC = new Family[] {new Family(5, 9, 21), new Family(5, 4, 15)};
-
     }
 
     @Test
@@ -47,7 +44,8 @@ public class BabysitterKataControllerTest {
         mvc.perform(post("/job")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
                 .content(request))
-                .andExpect(status().isAccepted());
+                .andExpect(status().isAccepted())
+                .andExpect(content().string("189"));
         assertEquals("189", babysitterKataController.validateJob(familyC).getBody());
     }
 
@@ -69,7 +67,5 @@ public class BabysitterKataControllerTest {
                 .content(request))
                 .andExpect(status().isBadRequest());
     }
-
-
 
 }
