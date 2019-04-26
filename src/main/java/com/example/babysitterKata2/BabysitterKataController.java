@@ -28,8 +28,6 @@ public class BabysitterKataController {
             }
         }
             Integer total = babysitterKataService.calculatePay(family);
-            System.out.println(total.toString());
-
         return new ResponseEntity<>(total.toString(), HttpStatus.ACCEPTED);
     }
 }

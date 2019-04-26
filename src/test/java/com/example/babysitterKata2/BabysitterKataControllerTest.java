@@ -38,9 +38,9 @@ public class BabysitterKataControllerTest {
     @Test
     public void validateJobEndpointReturnsAnJobAcceptedMessage() throws Exception {
         String request = "[{\"payShiftStartTime\": 5, \"payShiftEndTime\": 9, \"payRate\": 21}, {\"payShiftStartTime\": 5, \"payShiftEndTime\": 4, \"payRate\": 15}]";
-        Mockito.when(babysitterKataService.validateStartTimeWithInRange(anyInt())).thenReturn(true);
+        when(babysitterKataService.validateStartTimeWithInRange(anyInt())).thenReturn(true);
         when(babysitterKataService.validateEndTimeWithInRange(anyInt(), anyInt())).thenReturn(true);
-        Mockito.when(babysitterKataService.calculatePay(Mockito.any())).thenReturn(189);
+        when(babysitterKataService.calculatePay(Mockito.any())).thenReturn(189);
         mvc.perform(post("/job")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
                 .content(request))
